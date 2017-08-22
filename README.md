@@ -8,8 +8,10 @@ It works like this:
 - Pulls comma-separated tags from the data and creates a display filter component
 
 ## Some tools and technologies involved:
+- ES6
 - react.js
-- CORS
+- COR S
 - Postman
 - webpack
 - bootstrap
+- ESLint

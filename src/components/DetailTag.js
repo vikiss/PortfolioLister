@@ -1,17 +1,15 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Label } from 'react-bootstrap';
 
 const DetailTag = (props) =>
  (
-    <Button
-    className="mb1"
-    bsStyle="primary"
+    <Label
+    className="mb1 mr1"
+    bsStyle="info"
     bsSize="xsmall"
-    onClick={props.onClick}
-    href={`#${props.tag}`}
     >
       {props.tag}
-    </Button>
+    </Label>
   );
 
 

@@ -38,7 +38,7 @@ class TagSelector extends React.Component {
 
    render() {
        return (
-           <ButtonToolbar id="TagSelector">
+           <ButtonToolbar id="TagSelector" className="mb1">
              <Button
              key="all"
              className="mb1"
