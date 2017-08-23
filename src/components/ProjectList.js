@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MD5 from 'md5-es';
+import axios from 'axios';
 import ProjectDetail from './ProjectDetail';
 import TagSelector from './TagSelector';
 
@@ -13,20 +14,29 @@ class ProjectList extends Component {
     const uAgent = navigator.userAgent;
     const unixtime = Math.floor(Date.now() / 1000);
     const token = MD5.hash(`8c0cfbfa9a889b19321aa3ba4cbc3c78${unixtime}${uAgent}`);
-    const vHeaders = new Headers({
-  'User-Agent': uAgent,
-  'X-Authorization-Token': token,
-  'X-Authorization-Time': unixtime
-});
-    const vInit = { method: 'GET',
-                   headers: vHeaders,
-                   mode: 'cors',
-                   cache: 'default' };
-
-  fetch('https://pictureinsidepicture.com/api/getprlist', vInit)
+    const axiosparams = {
+          method: 'GET',
+          url: 'https://pictureinsidepicture.com/api/getprlist',
+          headers: {
+            'X-Authorization-Token': token,
+            'X-Authorization-Time': unixtime
+          },
+            withCredentials: false,
+          };
+    axios(axiosparams)
+    .then(response => this.setState({ projects: response.data.data }))
+    .catch((error) => console.log('Fetch error: ', error));
+/*
+fetch with cors only seems to work in chrome
+const vHeaders = new Headers({  'User-Agent': uAgent,
+    'X-Authorization-Token': token,  'X-Authorization-Time': unixtime });
+const vInit = { method: 'GET', headers: vHeaders, mode: 'cors', cache: 'default' };
+fetch('https://pictureinsidepicture.com/api/getprlist', vInit)
+    //.then(response => console.log(response));
     .then((response) => response.json())
     .then((responseData) => this.setState({ projects: responseData.data }))
     .catch((error) => console.log('Fetch error: ', error));
+*/
   }
 
   handleTagChange(value) {
